@@ -1,10 +1,5 @@
-<nav id="nav">
-  <ul class="flex-inline">
-    <li><%= link_to('Home', root_path) %></li>
-    <li><%= link_to('Stocks', '#') %></li>
-    <li><%= link_to('Quotes', '#') %></li>
-    <li><%= link_to('News', '#') %></li>
-    <li><%= link_to('Commentary', '#') %></li>
-    <li><%= link_to('Something', '#') %></li>
-  </ul>
-</nav>
+<% if !user_signed_in? %>
+  <%= render '/layouts/nav_guest' %>
+<% else %>
+  <%= render '/layouts/nav_admin' %>
+<% end %>

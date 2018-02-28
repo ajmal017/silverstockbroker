@@ -10,6 +10,29 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require jquery
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
+
+$(function () {
+  function setSection(item) {
+    $('.dash-section').each(function (i,v) {
+      if ($(this).data('section') === item) {
+        $(this).show();
+      }
+    })
+  }
+
+  setSection('dashboard');
+
+  $('#dashboard-container .item').on('click', function () {
+    $('.dash-section').hide();
+    $('#dashboard-container .item').each(function (i,v) {
+      $(this).removeClass('show');
+    })
+    $(this).addClass('show');
+
+    setSection($(this).data('list'))
+  })
+})
