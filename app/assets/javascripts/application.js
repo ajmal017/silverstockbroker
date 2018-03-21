@@ -13,26 +13,84 @@
 //= require jquery
 //= require rails-ujs
 //= require turbolinks
+//= require ckeditor/init
 //= require_tree .
+//= require bootstrap-sprockets
+//= require Chart.min
+var ready = function() {
+const stocks = $('.stock-list li').map(function(){
+              return $.trim($(this).text());
+            }).get();
 
-$(function () {
-  function setSection(item) {
-    $('.dash-section').each(function (i,v) {
-      if ($(this).data('section') === item) {
-        $(this).show();
-      }
-    })
+
+
+const stockStr = `https://api.iextrading.com/1.0/stock/market/batch?symbols=${stocks.join(',')}&types=quote,news,chart&range=1m&last=5`
+
+$.get(stockStr, function(data){
+  $.each(data, function (k,v) {
+
+    $('.stock-graph').append('<div class="tr">' +
+      '<span class="td">' + v.quote.symbol + '</span>' +
+      '<span class="td">' + v.quote.latestPrice + '</span>' +
+      '<span class="td stock-val">' + v.quote.change + '</span>' +
+      '<span class="td">' + v.quote.changePercent + '</span>' +
+      '<span class="td">' + v.quote.latestVolume + '</span>' +
+    '</div>')
+  })
+});
+
+
+var dailyData = [];
+var dailyTime = [];
+$.get('https://api.iextrading.com/1.0/stock/slv/chart/1d', function (data) {
+
+  for (var i = 0; i < data.length; i+= 10) {
+    if (data[i].average > 0) {
+      dailyData.push(data[i].average)
+      dailyTime.push(data[i].minute);
+    }
   }
 
-  setSection('dashboard');
+  var ctx = document.getElementById('daily-chart').getContext('2d');
+  var chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+          labels: dailyTime,
+          datasets: [{
+              label: "SLV",
+              backgroundColor: '#0d9ad6',
+              borderColor: '#0f6bad',
+              data: dailyData
+          }]
+      },
 
-  $('#dashboard-container .item').on('click', function () {
-    $('.dash-section').hide();
-    $('#dashboard-container .item').each(function (i,v) {
-      $(this).removeClass('show');
-    })
-    $(this).addClass('show');
-
-    setSection($(this).data('list'))
-  })
+      // Configuration options go here
+      options: {}
+  });
 })
+
+var moData = [];
+var moTime = [];
+  $.get('https://api.iextrading.com/1.0/stock/slv/chart/1m', function (data) {
+    for (var i = 13; i < data.length; i++) {
+      moData.push(data[i].close)
+      moTime.push(data[i].date);
+    }
+
+    var ctx = document.getElementById('weekly-chart').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: moTime,
+            datasets: [{
+                label: "SLV",
+                backgroundColor: '#0d9ad6',
+                borderColor: '#0f6bad',
+                data: moData
+            }]
+        },
+    });
+  })
+};
+
+$(document).on('turbolinks:load', ready);

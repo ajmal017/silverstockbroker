@@ -1,3 +1,15 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+$black: #363636;
+$green: #d3e061;
+$blue: #0d9ad6;
+$navy: #0f6bad;
+$light: #f3f3f4;
+$grey: #d6d6d6;
+
+$ease: .3s ease-in-out;
+
 * {
   box-sizing: border-box;
 }
@@ -8,12 +20,109 @@ html, body, h1, h2, h3, h4, h5, h6, p, span, input, textarea {
   font-family: 'Open Sans', sans-serif;
 }
 
+html {
+  font-size: 1.2vw;
+}
+
+h3 {
+  font-size: 1.8rem;
+}
+
+p, li, a, input {
+  font-size: 1rem;
+}
+
 a {
-  text-decoration: none;
+  text-decoration: none !important;
+
+  &:hover {
+    background: none !important;
+  }
+}
+
+body {
+  margin: 0 !important;
+}
+
+input {
+  padding: .25rem;
+}
+
+.table {
+  display: flex;
+  flex-flow: column nowrap;
+  font-size: .8rem;
+  margin: 0.5rem;
+  line-height: 1.5;
+  border-bottom: 1px solid #d0d0d0;
+  border-top: 1px solid #d0d0d0;
+  flex: 1 1 auto;
+}
+
+.th {
+  display: none;
+  font-weight: 700;
+  background: #efefef;
+}
+
+.th > .td {
+  white-space: normal;
+}
+
+.tr {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+}
+//
+// .tr:nth-of-type(even) {
+//   background-color: #f2f2f2;
+// }
+//
+// .tr:nth-of-type(odd) {
+//   background-color: #ffffff;
+// }
+
+.td {
+  display: flex;
+  flex-flow: row nowrap;
+  flex-grow: 1;
+  flex-basis: 0;
+  padding: 0.5em;
+  word-break: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0px;
+  white-space: nowrap;
+  border-bottom: 1px solid #d0d0d0;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    vertical-align: center
+}
+
+.notice,
+.alert {
+  display: none;
 }
 
 .padding-sm {
   padding: 1rem;
+}
+
+.dashboard-btn {
+  float: left;
+  background: $blue;
+  padding: .5rem 1rem;
+  border-radius: 5px;
+  color: #fff;
+
+  &:visited {
+    color: #fff;
+  }
 }
 
 .flex {
@@ -24,12 +133,12 @@ a {
   flex: 1;
 }
 
-.flex-2 {
-  flex: 2;
+.aside-flex {
+  flex: 3;
 }
 
-.flex-3 {
-  flex: 3;
+.center-flex{
+  flex: 5;
 }
 
 .flex-inline {
@@ -38,18 +147,128 @@ a {
   align-items: center;
 }
 
+.m-sm {
+  margin-bottom: 1rem;
+}
+
+.m-b-md {
+  margin-bottom: 3rem;
+}
+
+.title {
+  text-transform: uppercase;
+  padding-bottom: .5rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.gn {
+  color: $green;
+  border-bottom: .4rem solid $green;
+}
+
+.bl {
+  color: $blue;
+  border-bottom: .4rem solid $blue;
+}
+
+.table-row {
+  display: block;
+
+  li {
+    padding: .75rem .25rem;
+    margin-bottom: .75rem;
+    background: $light;
+
+    &:nth-of-type(odd) {
+      background: $grey;
+    }
+  }
+
+  a {
+    color: $blue;
+    text-transform: uppercase;
+    font-size: .8rem;
+    font-weight: 600;
+
+    &:visited {
+      color: $blue;
+    }
+  }
+}
+
+.dropdown {
+  .dropdown-content {
+    background: $black;
+    color: #fff;
+    position: absolute;
+    width: 12rem;
+    display: none;
+    left: -2rem;
+  }
+
+  li {
+    display: block;
+    margin: .5rem 0;
+    padding: .5rem;
+  }
+
+  &:hover .dropdown-content {
+    display: block;
+  }
+}
+
+.no-list-style {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.btn {
+  text-transform: uppercase;
+  font-size: .8rem;
+}
+
+.btn-bl {
+  background: $blue;
+  color: #fff;
+}
 
 
-#header-lg {
-  height: 20rem;
-  background: #ccc;
+#header {
+  .center {
+    padding: 3rem 0;
+    height: auto;
+    width: 32rem;
+  }
+
+  .header-bar {
+    background: $light;
+    padding: 1rem;
+    text-align: right;
+  }
+}
+
+#footer {
+  height: 4rem;
+  background: $black;
 }
 
 #nav {
+  background: $black;
+  text-transform: uppercase;
   padding: .5rem 0;
+  margin-bottom: 1rem;
 
   ul {
     list-style: none;
+    margin: 0;
+  }
+
+  a {
+    display: inline-block;
+    padding: 1rem 0;
+    color: #fff;
   }
 }
 
@@ -71,6 +290,10 @@ a {
     float: left;
     color: #ccc;
 
+    a {
+      color: #ccc;
+    }
+
     ul {
       margin: 0;
       padding: 0;
@@ -84,6 +307,10 @@ a {
 
     li {
       padding: .5rem 1rem;
+
+      & > a:hover {
+        color: #fff;
+      }
     }
 
     .logo {
@@ -103,7 +330,10 @@ a {
 
     .show {
       background: rgb(128, 205, 83);
-      color: #fff;
+
+      a {
+        color: #fff;
+      }
     }
 
     .item {
@@ -119,9 +349,10 @@ a {
   .dash-content {
     position: fixed;
     left: 16rem;
-    height: 100vh;
+    min-height: 100vh;
     right: 0;
     z-index: 1002;
+    overflow-y: scroll;
   }
 
   .header {
@@ -130,6 +361,6 @@ a {
   }
 
   .dash-section {
-    display: none;
+    padding: 2rem;
   }
 }

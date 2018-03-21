@@ -1,5 +1,19 @@
-<% if !user_signed_in? %>
-  <%= render '/layouts/nav_guest' %>
-<% else %>
-  <%= render '/layouts/nav_admin' %>
-<% end %>
+<nav id="nav">
+  <ul class="flex-inline">
+    <li><%= link_to('Home', root_path) %></li>
+    <li>
+      <div class="dropdown">
+        <%= link_to('Stocks', '#') %>
+        <ul class="dropdown-content stock-list no-list-style">
+        <% Stock.all.each do |stock| %>
+          <li><%= stock.name.upcase %></li>
+        <% end %>
+        </ul>
+      </div>
+    </li>
+    <li><%= link_to('Quotes', '#') %></li>
+    <li><%= link_to('News', '#') %></li>
+    <li><%= link_to('Commentary', commentaries_path) %></li>
+    <li><%= link_to('Backtests', '#') %></li>
+  </ul>
+</nav>

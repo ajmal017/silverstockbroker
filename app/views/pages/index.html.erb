@@ -1,18 +1,24 @@
 <main class="flex">
-  <aside class="left-aside flex-1 padding-sm">
+  <aside class="left-aside aside-flex padding-sm">
+    <h3 class="title gn">Stock Prices</h3>
     <%= render 'components/stock-graph' %>
   </aside>
-  <section class="flex-2 padding-sm">
-    <div class="comments-section">
-      comments
+  <section class="center-flex padding-sm">
+    <div class="comments-section m-b-md">
+      <h3 class="title bl">Commentary</h3>
+      <%= render 'components/commentary_list' %>
+      <button type="button" name="button" class="btn btn-bl">+ More Commentaries</button>
     </div>
     <div class="news-section">
-      news
+      <h3 class="title bl">News</h3>
+      <%= render 'components/commentary_list' %>
+      <button type="button" name="button" class="btn btn-bl">+ More News</button>
     </div>
   </section>
-  <aside class="right-aside flex-1 padding-sm">
-    <iframe
-       src="https://www.goldbroker.com/widget/iframe/live/XAG/320?currency=USD"
-        width="100%" height="320" style="border: 0; overflowhidden;"></iframe>
+  <aside class="right-aside aside-flex padding-sm">
+    <h3 class="title gn">Daily Chart</h3>
+      <canvas id="daily-chart"></canvas>
+    <h3 class="title gn">Weekly Chart</h3>
+      <canvas id="weekly-chart"></canvas>
   </aside>
 </main>
