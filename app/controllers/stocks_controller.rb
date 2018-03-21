@@ -1,15 +1,16 @@
 class StocksController < ApplicationController
-  before_action :set_stock, only: [:show, :edit, :update, :destroy]
+  before_action only: [:show, :edit, :update, :destroy]
 
   # GET /commentaries
   # GET /commentaries.json
   def index
-    @commentaries = Commentary.all
+    @stocks = Stocks.all
   end
 
   # GET /commentaries/1
   # GET /commentaries/1.json
   def show
+    render template: "pages/stock/#{params[:name]}"
   end
 
   # GET /commentaries/new
@@ -62,10 +63,10 @@ class StocksController < ApplicationController
   end
   #
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_stock
-      @stock = Stock.find(params[:id])
-    end
+    # # Use callbacks to share common setup or constraints between actions.
+    # def set_stock
+    #   @stock = Stock.find(params[:id])
+    # end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def stock_params

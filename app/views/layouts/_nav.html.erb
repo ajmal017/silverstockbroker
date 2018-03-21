@@ -6,7 +6,7 @@
         <%= link_to('Stocks', '#') %>
         <ul class="dropdown-content stock-list no-list-style">
         <% Stock.all.each do |stock| %>
-          <li><%= stock.name.upcase %></li>
+          <li><a href="./stocks/<%= stock.name.upcase %>"><%= stock.name.upcase %></a></li>
         <% end %>
         </ul>
       </div>
