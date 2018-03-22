@@ -26,10 +26,12 @@ const stocks = $('.stock-list li').map(function(){
 
 const stockStr = `https://api.iextrading.com/1.0/stock/market/batch?symbols=${stocks.join(',')}&types=quote,news,chart&range=1m&last=5`
 
+// Clean stock list
+$('.stock-graph-list').empty();
+
 $.get(stockStr, function(data){
   $.each(data, function (k,v) {
-
-    $('.stock-graph').append('<div class="tr">' +
+    $('.stock-graph-list').append('<div class="tr">' +
       '<span class="td">' + v.quote.symbol + '</span>' +
       '<span class="td">' + v.quote.latestPrice + '</span>' +
       '<span class="td stock-val">' + v.quote.change + '</span>' +

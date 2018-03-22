@@ -6,12 +6,24 @@
   <section class="center-flex padding-sm">
     <div class="comments-section m-b-md">
       <h3 class="title bl">Commentary</h3>
-      <%= render 'components/commentary_list' %>
+
+    <ul class="table-row no-list-style">
+      <% @commentaries.each do |post| %>
+      <li><%= link_to post.title, post %></li>
+      <% end %>
+    </ul>
+
       <button type="button" name="button" class="btn btn-bl">+ More Commentaries</button>
     </div>
     <div class="news-section">
       <h3 class="title bl">News</h3>
-      <%= render 'components/commentary_list' %>
+
+      <ul class="table-row no-list-style">
+        <% @news.each do |post| %>
+        <li><%= link_to post.title, post %></li>
+        <% end %>
+      </ul>
+
       <button type="button" name="button" class="btn btn-bl">+ More News</button>
     </div>
   </section>

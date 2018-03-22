@@ -55,6 +55,7 @@ class StocksController < ApplicationController
   # # DELETE /commentaries/1
   # # DELETE /commentaries/1.json
   def destroy
+    @stock = Stock.find(params[:id])
     @stock.destroy
     respond_to do |format|
       format.html { redirect_to dashboard_symbols_path, notice: 'Stock was successfully destroyed.' }

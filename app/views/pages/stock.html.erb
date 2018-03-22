@@ -1,4 +1,5 @@
 <script>
+var ready = function() {
   var url = $(location).attr('href'),
       parts = url.split("/"),
       symbol = parts[parts.length-1];
@@ -11,13 +12,21 @@
 
   $.get(stockStr, function(data){
     if (isEmptyObject(data)) {
-      $('.temp').text('no stock here')
+      $('.symbol').text('no stock here')
     } else {
-      $('.temp').text('got one')
+      $.each(data, function (k,v) {
+        console.log(v.quote);
+        $('.symbol').text(v.quote.symbol)
+        $('.company-name').text(v.quote.companyName)
+      })
     }
   })
+};
+
+$(document).on('turbolinks:load', ready);
 </script>
 
 <section>
-  <h2 class="temp"></h2>
+  <h2 class="symbol"></h2>
+  <h4 class="company-name"></h4>
 </section>

@@ -35,8 +35,21 @@ p, li, a, input {
 a {
   text-decoration: none !important;
 
+  &.btn {
+    margin-top: 1rem;
+    padding: .5rem 2rem;
+    background: $blue;
+    color: #fff;
+
+    &:hover {
+      background: $navy !important;
+      color: #fff !important;
+    }
+  }
+
   &:hover {
     background: none !important;
+    color: $navy !important;
   }
 }
 
@@ -252,6 +265,12 @@ input {
 #footer {
   height: 4rem;
   background: $black;
+  line-height: 4rem;
+  padding: 0 4rem;
+
+  .right {
+    float: right;
+  }
 }
 
 #nav {
@@ -269,6 +288,10 @@ input {
     display: inline-block;
     padding: 1rem 0;
     color: #fff;
+
+    &:hover {
+      color: rgba(255,255,255,.75) !important;
+    }
   }
 }
 
@@ -298,15 +321,14 @@ input {
       margin: 0;
       padding: 0;
       list-style: none;
-
-      ul {
-        margin-left: 1.25rem;
-        font-size: .9rem;
-      }
     }
 
     li {
       padding: .5rem 1rem;
+
+      & > a {
+        padding: 0;
+      }
 
       & > a:hover {
         color: #fff;
@@ -362,5 +384,45 @@ input {
 
   .dash-section {
     padding: 2rem;
+  }
+}
+
+.post-item {
+  background: #fff;
+  margin: 1rem 0;
+  padding: 1rem;
+  border-radius: 5px;
+
+  .post-options {
+    text-align: right;
+    padding-right: 2rem;
+  }
+
+  h5 {
+    margin-bottom: 1rem;
+  }
+
+  h3 {
+    margin-bottom: 1rem;
+  }
+}
+
+.content-container {
+  width: 70%;
+  padding: 1rem 2rem;
+
+  .post-item {
+    margin-bottom: .75rem;
+    background: $light;
+    border-radius: 5px;
+  }
+}
+
+.signin {
+  padding: 8rem 0;
+  text-align: center;
+
+  h2 {
+    margin-bottom: 1rem;
   }
 }

@@ -1,0 +1,14 @@
+<% @posts.each do |post| %>
+  <div class="post-item">
+    <h3><%= post.title %></h3>
+    <span><%= raw(post.content) %></span>
+    <h5><%= post.category %></h5>
+    <% if user_signed_in? %>
+      <div class="post-options">
+        <span><%= link_to 'Show', post %></span>
+        <span><%= link_to 'Edit', edit_post_path(post) %></span>
+        <span><%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+      </div>
+    <% end %>
+  </div>
+<% end %>

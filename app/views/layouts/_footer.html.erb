@@ -1,3 +1,5 @@
 <footer id="footer">
-  copyright 2108
+  <% if user_signed_in? %>
+    <%= link_to('Sign Out', destroy_user_session_path, :method => :delete, class: 'right') %>
+  <% end %>
 </footer>

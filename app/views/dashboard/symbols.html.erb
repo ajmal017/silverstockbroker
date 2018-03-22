@@ -1,34 +1,31 @@
-<% if user_signed_in? %>
-  <section id="dashboard-container">
-    <%= render 'dash_nav' %>
+<section id="dashboard-container">
+<%= render 'dash_nav' %>
 
-    <section class="dash-content">
-      <%= render 'header' %>
+<section class="dash-content">
+  <%= render 'header' %>
 
-      <section class="dash-section">
-        symbols
+  <section class="dash-section">
+    symbols
 
-        <%= simple_form_for(@stockNew) do |f| %>
-          <%= f.error_notification %>
+    <%= simple_form_for(@stockNew) do |f| %>
+      <%= f.error_notification %>
 
-          <div class="form-inputs">
-            <%= f.input :name %>
-          </div>
+      <div class="form-inputs">
+        <%= f.input :name %>
+      </div>
 
-          <div class="form-actions">
-            <%= f.button :submit, class: "m-b-md" %>
-          </div>
+      <div class="form-actions">
+        <%= f.button :submit, class: "m-b-md" %>
+      </div>
 
-          <ul class="table-row no-list-style">
-            <% @stocks.each do |stock| %>
-              <li><%= stock.name.upcase %>  <%= link_to 'Delete', stock, method: :delete, data: { confirm: "Are you sure you want to delete #{stock.name}?" } %></li>
-            <% end %>
-          </ul>
+      <ul class="table-row no-list-style">
+        <% @stocks.each do |stock| %>
+          <li><%= stock.name %>  <%= link_to 'Delete', stock, method: :delete, data: { confirm: "Are you sure you want to delete #{stock.name}?" } %></li>
         <% end %>
+      </ul>
 
-      </section>
+
+      <% end %>
     </section>
   </section>
-<% else %>
-  <script> window.location = '/' </script>
-<% end %>
+</section>

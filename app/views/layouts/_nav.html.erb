@@ -6,14 +6,14 @@
         <%= link_to('Stocks', '#') %>
         <ul class="dropdown-content stock-list no-list-style">
         <% Stock.all.each do |stock| %>
-          <li><a href="./stocks/<%= stock.name.upcase %>"><%= stock.name.upcase %></a></li>
+          <li><%= link_to(stock.name.upcase, "#{stocks_path}/#{stock.name.upcase}") %></li>
         <% end %>
         </ul>
       </div>
     </li>
     <li><%= link_to('Quotes', '#') %></li>
-    <li><%= link_to('News', '#') %></li>
-    <li><%= link_to('Commentary', commentaries_path) %></li>
-    <li><%= link_to('Backtests', '#') %></li>
+    <li><%= link_to('News', news_path) %></li>
+    <li><%= link_to('Commentary', commentary_path) %></li>
+    <li><%= link_to('Backtests', backtests_path) %></li>
   </ul>
 </nav>
