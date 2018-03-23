@@ -1,18 +1,16 @@
 <nav class="nav">
-  <span class="logo">Silver</span>
-  <ul>
+  <a href="<%= root_path %>">
+    <%= image_tag "/assets/icon.png", class: 'center logo' %>
+  </a>
+  <ul class="list">
     <li><%= link_to('Dashboard', dashboard_path) %></li>
-  </ul>
-  <ul>
     <li>Posts</li>
     <ul>
       <li><%= link_to('Create Post', dashboard_new_path) %></li>
-      <li><%= link_to('All Posts', dashboard_all_posts_path) %></li>
-      <ul>
-        <li><%= link_to('Commentary Posts', dashboard_commentary_posts_path) %></li>
-        <li><%= link_to('News Posts', dashboard_news_posts_path) %></li>
-        <li><%= link_to('Backtest Posts', dashboard_backtest_posts_path) %></li>
-      </ul>
+      <li><%= link_to('All', dashboard_all_posts_path) %></li>
+      <li><%= link_to('News', dashboard_news_posts_path) %></li>
+      <li><%= link_to('Commentary', dashboard_commentary_posts_path) %></li>
+      <li><%= link_to('Backtest', dashboard_backtest_posts_path) %></li>
     </ul>
   </ul>
   <li><%= link_to('Symbols', dashboard_symbols_path) %></li>

@@ -5,7 +5,7 @@ class DashboardController < ApplicationController
   end
 
   def all_posts
-    @posts = Post.all
+    @posts = Post.all.order("created_at desc")
   end
 
   def posts
@@ -13,15 +13,15 @@ class DashboardController < ApplicationController
   end
 
   def dash_commentary_posts
-    @posts = Post.where(:category => 'commentary')
+    @posts = Post.where(:category => 'commentary').order("created_at DESC")
   end
 
   def dash_news_posts
-    @posts = Post.where(:category => 'news')
+    @posts = Post.where(:category => 'news').order("created_at DESC")
   end
 
   def dash_backtest_posts
-    @posts = Post.where(:category => 'backtest')
+    @posts = Post.where(:category => 'backtest').order("created_at DESC")
   end
 
   def symbols

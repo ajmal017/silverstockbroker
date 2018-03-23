@@ -2,6 +2,7 @@
   <div class="post-item">
     <h3><%= post.title %></h3>
     <span><%= raw(post.content).truncate(358) %></span>
+    <span>Tags: <%= post.all_tags %></span>
     <% if user_signed_in? %>
       <h5><%= post.category %></h5>
       <div class="post-options">
@@ -10,7 +11,7 @@
         <span><%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %></span>
       </div>
     <% else %>
-      <%= link_to 'View all', post, class: 'btn'%>
+      <%= link_to 'View more', post, class: 'btn'%>
     <% end %>
   </div>
 <% end %>

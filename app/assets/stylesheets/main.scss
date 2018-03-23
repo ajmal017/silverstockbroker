@@ -237,6 +237,13 @@ input {
   padding: 0;
 }
 
+.inline-list {
+  & > li {
+    display: inline-block;
+    margin: 0 .5rem;
+  }
+}
+
 .btn {
   text-transform: uppercase;
   font-size: .8rem;
@@ -313,6 +320,19 @@ input {
     float: left;
     color: #ccc;
 
+    .logo {
+      height: 4rem;
+      transition: .3s ease-in-out;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+
+    .list {
+      margin-top: 1rem;
+    }
+
     a {
       color: #ccc;
     }
@@ -370,16 +390,29 @@ input {
 
   .dash-content {
     position: fixed;
+    height: 100%;
     left: 16rem;
     min-height: 100vh;
     right: 0;
+    top: 4rem;
     z-index: 1002;
     overflow-y: scroll;
+    padding-bottom: 6rem;
   }
 
   .header {
+    position: fixed;
+    right: 0;
+    left: 16rem;
+    top: 0;
     height: 4rem;
+    text-align: right;
+    padding-right: 2rem;
     background: rgb(215,221,227);
+
+    ul > li {
+      line-height: 4rem;
+    }
   }
 
   .dash-section {
