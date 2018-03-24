@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :posts, :stocks
+  resources :posts, :stocks, :tags
 
   mount Ckeditor::Engine => '/ckeditor'
   devise_for :users

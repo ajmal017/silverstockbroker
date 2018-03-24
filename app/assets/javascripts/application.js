@@ -17,6 +17,7 @@
 //= require_tree .
 //= require bootstrap-sprockets
 //= require Chart.min
+
 var ready = function() {
 const stocks = $('.stock-list li').map(function(){
               return $.trim($(this).text());
@@ -37,6 +38,7 @@ $.get(stockStr, function(data){
       '<span class="td stock-val">' + v.quote.change + '</span>' +
       '<span class="td">' + v.quote.changePercent + '</span>' +
       '<span class="td">' + v.quote.latestVolume + '</span>' +
+      '<a class="stock-link" href="./stocks/' + v.quote.symbol + '"></a>' +
     '</div>')
   })
 });

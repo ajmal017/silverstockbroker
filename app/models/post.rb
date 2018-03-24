@@ -12,6 +12,10 @@ class Post < ApplicationRecord
     tags.map(&:name).join(', ')
   end
 
+  def tag_arr
+    tags.map(&:name)
+  end
+
   def self.tagged_with(name)
     Tag.find_by!(name: name).posts
   end

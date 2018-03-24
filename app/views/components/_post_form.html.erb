@@ -5,7 +5,6 @@
     <%= f.text_field :title %>
   </div>
 
-
   <div class="form-inputs">
     <%= f.label :content %>
     <%= f.cktext_area :content %>
@@ -13,6 +12,11 @@
 
   <%= f.label :category %>
   <%= f.select(:category, options_for_select([['Commentary', 'commentary'], ['News', 'news'], ['Backtest', 'backtest']]))%>
+  
+  <div class="form-inputs">
+    <%= f.label :author %>
+    <%= f.text_field :author %>
+  </div>
 
   <%= f.label :all_tags %>
   <%= f.text_field :all_tags %>
