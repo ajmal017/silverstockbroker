@@ -43,6 +43,9 @@ $.get(stockStr, function(data){
   })
 });
 
+$('.bar-box').on('click', function () {
+  $('.inner-nav').toggleClass('show-nav');
+})
 
 var dailyData = [];
 var dailyTime = [];

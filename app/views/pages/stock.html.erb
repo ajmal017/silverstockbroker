@@ -4,7 +4,7 @@ var ready = function() {
       parts = url.split("/"),
       symbol = parts[parts.length-1];
 
-  const stockStr = `https://api.iextrading.com/1.0/stock/market/batch?symbols=${symbol}&types=quote,news,chart&range=1m&last=5`
+  const stockStr = `https://api.iextrading.com/1.0/stock/market/batch?symbols=${symbol}&types=quote,company,earnings,chart&range=1m&last=5`
 
   function isEmptyObject(obj){
     return JSON.stringify(obj) === '{}';
@@ -15,9 +15,26 @@ var ready = function() {
       $('.symbol').text('no stock here')
     } else {
       $.each(data, function (k,v) {
-        console.log(v.quote);
+        console.log(v);
         $('.symbol').text(v.quote.symbol)
         $('.company-name').text(v.quote.companyName)
+        $('.company-desc').text(v.company.description)
+
+        $.each(v.earnings.earnings, function (k, v) {
+          if (v.EPSReportDate !== null) {
+            $('.earnings').append(
+              '<li class=title>' + v.EPSReportDate + '</li>' +
+              '<li>Actual EPS: ' + v.actualEPS + '</li>' +
+              '<li>Consensus EPS: ' + v.consensusEPS + '</li>' +
+              '<li>Estimated EPS: ' + v.estimatedEPS + '</li>' +
+              '<li>Announce Time: ' + v.announceTime + '</li>' +
+              '<li>Number Of Estimates: ' + v.numberOfEstimates + '</li>' +
+              '<li>EPS SurpriseDollar: ' + v.EPSSurpriseDollar + '</li>' +
+              '<li>Fiscal Period: ' + v.fiscalPeriod + '</li>' +
+              '<li>Fiscal End Date: ' + v.fiscalEndDate + '</li>'
+            )
+          }
+        })
       })
     }
   })
@@ -26,7 +43,31 @@ var ready = function() {
 $(document).on('turbolinks:load', ready);
 </script>
 
-<section>
-  <h2 class="symbol"></h2>
-  <h4 class="company-name"></h4>
-</section>
+<%= render 'layouts/inner_nav' %>
+<%= render 'ads/banner' %>
+<div class="stock-container flex-row">
+  <section class="stock-content flex-2">
+    <h2 class="symbol inline"></h2>
+    <h4 class="company-name inline"></h4>
+    <span class="company-desc block"></span>
+
+    <h3 class="title bl">Commentary</h3>
+    <%= render 'components/truncated_list', :@posts => Post.tagged_with(@symbol).where(:category => 'commentary') %>
+
+    <h3 class="title bl">News</h3>
+    <%= render 'components/truncated_list', :@posts => Post.tagged_with(@symbol).where(:category => 'news') %>
+
+    <h3 class="title bl">Links</h3>
+      <h5>Earnings</h5>
+      <div class="popup">
+        <div class="callout">
+          <h3 class="title">Earnings</h3>
+          <ul class="no-list-style earnings"></ul>
+        </div>
+      </div>
+  </section>
+
+  <aside class="stock-aside flex-1">
+    <%= render 'components/stock-graph' %>
+  </aside>
+</div>

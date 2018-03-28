@@ -5,6 +5,8 @@
     <% post.tag_arr.each do |tag| %>
       <%= link_to(tag, "#{tags_path}/#{tag.parameterize}") %>
     <% end %>
+
+    <span class="block">By: <%= post.author %></span>
     <% if user_signed_in? %>
       <h5><%= post.category %></h5>
       <div class="post-options">

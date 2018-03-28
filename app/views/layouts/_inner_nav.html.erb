@@ -1,0 +1,29 @@
+<div id="header">
+  <div class="header-bar">
+    <a href="<%= root_path %>">
+      <%= image_tag "/assets/icon.png", class: 'inner-logo' %>
+    </a>
+    <div class="bar-box">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+  </div>
+  <ul class="inner-nav no-list-style">
+    <li><%= link_to('Home', root_path) %></li>
+    <li>
+      <div class="dropdown">
+        <%= link_to('Stocks', '#') %>
+        <ul class="dropdown-content stock-list no-list-style">
+        <% Stock.all.each do |stock| %>
+          <li><%= link_to(stock.name.upcase, "#{stocks_path}/#{stock.name.upcase}") %></li>
+        <% end %>
+        </ul>
+      </div>
+    </li>
+    <li><%= link_to('Quotes', '#') %></li>
+    <li><%= link_to('News', news_path) %></li>
+    <li><%= link_to('Commentary', commentary_path) %></li>
+    <li><%= link_to('Backtests', backtests_path) %></li>
+  </ul>
+</div>

@@ -10,6 +10,7 @@ class StocksController < ApplicationController
   # GET /commentaries/1
   # GET /commentaries/1.json
   def show
+    @symbol = params[:id].downcase
     render template: "pages/stock/#{params[:name]}"
   end
 
