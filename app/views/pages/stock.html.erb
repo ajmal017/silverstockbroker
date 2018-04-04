@@ -4,7 +4,7 @@ var ready = function() {
       parts = url.split("/"),
       symbol = parts[parts.length-1];
 
-  const stockStr = `https://api.iextrading.com/1.0/stock/market/batch?symbols=${symbol}&types=quote,company,earnings,chart&range=1m&last=5`
+  const stockStr = `https://api.iextrading.com/1.0/stock/market/batch?symbols=${symbol}&types=financials,company,earnings,chart&range=1m&last=5`
 
   function isEmptyObject(obj){
     return JSON.stringify(obj) === '{}';
@@ -16,8 +16,8 @@ var ready = function() {
     } else {
       $.each(data, function (k,v) {
         console.log(v);
-        $('.symbol').text(v.quote.symbol)
-        $('.company-name').text(v.quote.companyName)
+        $('.symbol').text(v.company.symbol)
+        $('.company-name').text(v.company.companyName)
         $('.company-desc').text(v.company.description)
 
         $.each(v.earnings.earnings, function (k, v) {
@@ -38,36 +38,59 @@ var ready = function() {
       })
     }
   })
+
+  $('.stock-links li').on('click', function () {
+    $('.popup ul').empty();
+    $('.callout .callout-title').text($(this).data('title'));
+    $('.popup').fadeIn();
+
+    $('.callout ul').filter(function(){
+      return $(this).data('title') === $(this).data('title')
+    }).show();
+  })
 };
 
 $(document).on('turbolinks:load', ready);
 </script>
 
 <%= render 'layouts/inner_nav' %>
+<section class="content">
 <%= render 'ads/banner' %>
-<div class="stock-container flex-row">
-  <section class="stock-content flex-2">
-    <h2 class="symbol inline"></h2>
-    <h4 class="company-name inline"></h4>
-    <span class="company-desc block"></span>
+  <div class="width flex-row">
+    <section class="flex-2">
+      <div class="m-b-sm">
+        <h2 class="symbol inline"></h2>
+        <h4 class="company-name inline"></h4>
+      </div>
+      <span class="company-desc m-b-md block"></span>
 
-    <h3 class="title bl">Commentary</h3>
-    <%= render 'components/truncated_list', :@posts => Post.tagged_with(@symbol).where(:category => 'commentary') %>
+      <% if Post.tagged_with(@symbol) != nil %>
+      <h3 class="title bl">Commentary</h3>
+      <%= render 'components/truncated_list', :@posts => Post.tagged_with(@symbol).where(:category => 'commentary') %>
 
-    <h3 class="title bl">News</h3>
-    <%= render 'components/truncated_list', :@posts => Post.tagged_with(@symbol).where(:category => 'news') %>
+      <h3 class="title bl">News</h3>
+      <%= render 'components/truncated_list', :@posts => Post.tagged_with(@symbol).where(:category => 'news') %>
+      <% end %>
 
-    <h3 class="title bl">Links</h3>
-      <h5>Earnings</h5>
+      <h3 class="title bl">Links</h3>
+      <ul class="no-list-style stock-links">
+        <li data-title="Earnings">Earnings</li>
+        <li data-title="Financials">Financials</li>
+      </ul>
+
       <div class="popup">
         <div class="callout">
-          <h3 class="title">Earnings</h3>
-          <ul class="no-list-style earnings"></ul>
+          <h3 class="callout-title"></h3>
+          <ul data-section="Earnings" class="no-list-style earnings"></ul>
         </div>
       </div>
-  </section>
+    </section>
 
-  <aside class="stock-aside flex-1">
-    <%= render 'components/stock-graph' %>
-  </aside>
-</div>
+    <aside class="stock-aside flex-1">
+      <%= render 'components/stock-graph' %>
+      <%= render 'ads/aside_ad' %>
+      <%= render 'ads/aside_ad' %>
+      <%= render 'ads/aside_ad' %>
+    </aside>
+  </div>
+</section>

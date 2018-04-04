@@ -17,6 +17,6 @@ class Post < ApplicationRecord
   end
 
   def self.tagged_with(name)
-    Tag.find_by!(name: name).posts
+    Tag.find_by!(name: name).posts rescue nil
   end
 end

@@ -20,10 +20,8 @@
 
 var ready = function() {
 const stocks = $('.stock-list li').map(function(){
-              return $.trim($(this).text());
-            }).get();
-
-
+                return $.trim($(this).text());
+              }).get();
 
 const stockStr = `https://api.iextrading.com/1.0/stock/market/batch?symbols=${stocks.join(',')}&types=quote,news,chart&range=1m&last=5`
 
@@ -38,7 +36,7 @@ $.get(stockStr, function(data){
       '<span class="td stock-val">' + v.quote.change + '</span>' +
       '<span class="td">' + v.quote.changePercent + '</span>' +
       '<span class="td">' + v.quote.latestVolume + '</span>' +
-      '<a class="stock-link" href="./stocks/' + v.quote.symbol + '"></a>' +
+      '<a class="stock-link" href="../stocks/' + v.quote.symbol + '"></a>' +
     '</div>')
   })
 });
@@ -97,6 +95,15 @@ var moTime = [];
             }]
         },
     });
+  })
+
+  // toggle popup
+  $('.popup').on('click', function() {
+    $(this).fadeOut();
+  })
+
+  $('.popup .callout').on('click', function (e) {
+    e.stopPropagation();
   })
 };
 
