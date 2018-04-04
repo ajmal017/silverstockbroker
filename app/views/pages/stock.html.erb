@@ -1,3 +1,4 @@
+<% title @symbol %>
 <script>
 var ready = function() {
   var url = $(location).attr('href'),
@@ -80,7 +81,7 @@ $(document).on('turbolinks:load', ready);
 
       <div class="popup">
         <div class="callout">
-          <h3 class="callout-title"></h3>
+          <h3 class="callout-title upcase underline"></h3>
           <ul data-section="Earnings" class="no-list-style earnings"></ul>
         </div>
       </div>

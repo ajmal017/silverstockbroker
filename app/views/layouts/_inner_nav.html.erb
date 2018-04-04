@@ -4,9 +4,7 @@
       <%= image_tag "/assets/icon.png", class: 'inner-logo' %>
     </a>
     <div class="bar-box">
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
+      <i class="fas fa-angle-up"></i>
     </div>
   </div>
   <ul class="inner-nav no-list-style">
@@ -25,5 +23,6 @@
     <li><%= link_to('News', news_path) %></li>
     <li><%= link_to('Commentary', commentary_path) %></li>
     <li><%= link_to('Backtests', backtests_path) %></li>
+    <li class="f-right"><%= render 'components/search' %></li>
   </ul>
 </div>

@@ -43,6 +43,7 @@ $.get(stockStr, function(data){
 
 $('.bar-box').on('click', function () {
   $('.inner-nav').toggleClass('show-nav');
+  $(this).children().toggleClass('fa-angle-up fa-angle-down')
 })
 
 var dailyData = [];

@@ -1,6 +1,17 @@
+<% title @title %>
+<% title 'News' %>
 <%= render 'layouts/inner_nav' %>
-<%= render 'ads/banner' %>
-<section class="content-container">
-  <h2>Tags for <%= @title %></h2>
-  <%= render 'components/truncated_list' %>
+<section class="content">
+  <%= render 'ads/banner' %>
+  <section class="width margin flex-row">
+    <section class="content-container flex-2">
+      <h2>Tags for <%= @title %></h2>
+      <%= render 'components/truncated_list' %>
+    </section>
+    <aside class="stock-aside flex-1">
+      <%= render 'ads/aside_ad' %>
+      <%= render 'ads/aside_ad' %>
+      <%= render 'ads/aside_ad' %>
+    </aside>
+  </section>
 </section>
