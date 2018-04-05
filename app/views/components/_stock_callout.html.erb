@@ -1,0 +1,81 @@
+<script>
+var ready = function() {
+  const stockStr = `https://api.iextrading.com/1.0/stock/market/batch?symbols=${'<%= @term %>'}&types=quote,chart&range=1d`
+
+  var dailyData = [],
+      dailyTime = [];
+
+  function isEmptyObject(obj){
+    return JSON.stringify(obj) === '{}';
+  }
+
+  $.get(stockStr, function(data){
+    if (isEmptyObject(data)) {
+      return
+    } else {
+      $('.stock-callout').css('display', 'flex');
+      $('#current-chart').show();
+
+      $.each(data, function (k,v) {
+        $('.symbol').text(v.quote.symbol)
+        $('.company-name').text(v.quote.companyName)
+        $('.company-price').text(v.quote.latestPrice.toFixed(2))
+        $('.company-high').text('High: ' + v.quote.high)
+        $('.company-low').text('Low: ' + v.quote.low)
+        $('.company-change').html('Change: <span>' + v.quote.change + '</span>')
+
+        if (v.quote.change >= 0) {
+          $('.company-change span, .company-price').addClass('success');
+        } else {
+          $('.company-change span, .company-price').addClass('danger');
+        }
+
+        for (var i = 0; i < v.chart.length; i+= 30) {
+          if (v.chart[i].marketAverage > 0) {
+            dailyTime.push(v.chart[i].minute);
+            dailyData.push(v.chart[i].marketAverage);
+          }
+        }
+      })
+
+      var ctx = document.getElementById('current-chart').getContext('2d');
+      var chart = new Chart(ctx, {
+          type: 'line',
+          data: {
+              labels: dailyTime,
+              datasets: [{
+                  backgroundColor: '#0d9ad6',
+                  borderColor: '#0f6bad',
+                  data: dailyData
+              }]
+          },
+
+          // Configuration options go here
+          options: {
+            legend: {
+              display: false
+            },
+          }
+      });
+    }
+  })
+};
+$(document).on('turbolinks:load', ready);
+</script>
+
+<div class="stock-callout flex-row m-b-sm">
+  <div class="flex-1">
+    <h2 class="symbol inline"></h2>
+    <h4 class="company-name block"></h4>
+    <%= link_to('View Profile', "#{stocks_path}/#{@term}", class: 'inline') %>
+  </div>
+  <div class="flex-1">
+    <ul class="no-list-style text-right">
+      <li><h2 class="company-price"></h2></li>
+      <li class="company-high"></li>
+      <li class="company-low"></li>
+      <li class="company-change"></li>
+    </ul>
+  </div>
+</div>
+<canvas id="current-chart" class="m-b-md"></canvas>

@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get '/news' => 'pages#news'
   get '/commentary' => 'pages#commentary'
   get '/backtests' => 'pages#backtests'
+  get '/search-results' => 'pages#search_results'
 
   get '/dashboard' => 'dashboard#index'
   get '/dashboard/all-posts' => 'dashboard#all_posts'

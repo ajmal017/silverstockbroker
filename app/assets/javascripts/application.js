@@ -31,11 +31,11 @@ $('.stock-graph-list').empty();
 $.get(stockStr, function(data){
   $.each(data, function (k,v) {
     $('.stock-graph-list').append('<div class="tr">' +
-      '<span class="td">' + v.quote.symbol + '</span>' +
+      '<span class="td blue">' + v.quote.symbol + '</span>' +
       '<span class="td">' + v.quote.latestPrice + '</span>' +
       '<span class="td stock-val">' + v.quote.change + '</span>' +
-      '<span class="td">' + v.quote.changePercent + '</span>' +
-      '<span class="td">' + v.quote.latestVolume + '</span>' +
+      '<span class="td">' + (v.quote.changePercent).toFixed(2) + '</span>' +
+      '<span class="td">' + (v.quote.latestVolume) + '</span>' +
       '<a class="stock-link" href="../stocks/' + v.quote.symbol + '"></a>' +
     '</div>')
   })
@@ -49,30 +49,33 @@ $('.bar-box').on('click', function () {
 var dailyData = [];
 var dailyTime = [];
 $.get('https://api.iextrading.com/1.0/stock/slv/chart/1d', function (data) {
+  console.log(data);
 
-  for (var i = 0; i < data.length; i+= 10) {
+  for (var i = 0; i < data.length; i+= 30) {
     if (data[i].average > 0) {
       dailyData.push(data[i].average)
       dailyTime.push(data[i].minute);
     }
   }
 
-  var ctx = document.getElementById('daily-chart').getContext('2d');
-  var chart = new Chart(ctx, {
-      type: 'line',
-      data: {
-          labels: dailyTime,
-          datasets: [{
-              label: "SLV",
-              backgroundColor: '#0d9ad6',
-              borderColor: '#0f6bad',
-              data: dailyData
-          }]
-      },
+  if ($('#daily-chart').length > 0) {
+    var ctx = document.getElementById('daily-chart').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: dailyTime,
+            datasets: [{
+                label: "SLV",
+                backgroundColor: '#0d9ad6',
+                borderColor: '#0f6bad',
+                data: dailyData
+            }]
+        },
 
-      // Configuration options go here
-      options: {}
-  });
+        // Configuration options go here
+        options: {}
+    });
+  }
 })
 
 var moData = [];
@@ -83,19 +86,21 @@ var moTime = [];
       moTime.push(data[i].date);
     }
 
-    var ctx = document.getElementById('weekly-chart').getContext('2d');
-    var chart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: moTime,
-            datasets: [{
-                label: "SLV",
-                backgroundColor: '#0d9ad6',
-                borderColor: '#0f6bad',
-                data: moData
-            }]
-        },
-    });
+    if ($('#weekly-chart').length > 0) {
+      var ctx = document.getElementById('weekly-chart').getContext('2d');
+      var chart = new Chart(ctx, {
+          type: 'line',
+          data: {
+              labels: moTime,
+              datasets: [{
+                  label: "SLV",
+                  backgroundColor: '#0d9ad6',
+                  borderColor: '#0f6bad',
+                  data: moData
+              }]
+          },
+      });
+    }
   })
 
   // toggle popup

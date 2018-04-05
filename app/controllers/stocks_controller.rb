@@ -11,6 +11,10 @@ class StocksController < ApplicationController
   # GET /commentaries/1.json
   def show
     @symbol = params[:id].downcase
+    @news = Post.tagged_with(@symbol).where(:category => 'news') rescue nil
+    @commentary = Post.tagged_with(@symbol).where(:category => 'commentary') rescue nil
+    @backtests = Post.tagged_with(@symbol).where(:category => 'backtest') rescue nil
+
     render template: "pages/stock/#{params[:name]}"
   end
 

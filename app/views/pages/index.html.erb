@@ -1,9 +1,11 @@
 <%= render '/layouts/header' %>
 <%= render '/layouts/nav' %>
-<main class="flex">
+<main class="flex margin">
   <aside class="left-aside aside-flex padding-sm">
     <h3 class="title gn">Stock Prices</h3>
     <%= render 'components/stock-graph' %>
+    <%= render 'ads/aside_ad' %>
+    <%= render 'ads/aside_ad' %>
   </aside>
   <section class="center-flex padding-sm">
     <div class="comments-section m-b-md">
@@ -32,7 +34,11 @@
   <aside class="right-aside aside-flex padding-sm">
     <h3 class="title gn">Daily Chart</h3>
       <canvas id="daily-chart"></canvas>
+    <div class="m-b-md"></div>
     <h3 class="title gn">Weekly Chart</h3>
       <canvas id="weekly-chart"></canvas>
+    <div class="m-b-md"></div>
+
+    <%= render 'ads/aside_ad' %>
   </aside>
 </main>

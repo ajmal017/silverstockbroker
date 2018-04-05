@@ -12,13 +12,13 @@
 
   <%= f.label :category %>
   <%= f.select(:category, options_for_select([['Commentary', 'commentary'], ['News', 'news'], ['Backtest', 'backtest']]))%>
-  
+
   <div class="form-inputs">
     <%= f.label :author %>
     <%= f.text_field :author %>
   </div>
 
-  <%= f.label :all_tags %>
+  <%= f.label :all_tags, 'Tags (comma seperated)' %>
   <%= f.text_field :all_tags %>
 
   <div class="form-actions">

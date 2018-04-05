@@ -7,6 +7,8 @@ $blue: #0d9ad6;
 $navy: #0f6bad;
 $light: #f3f3f4;
 $grey: #d6d6d6;
+$success: #5cb85c;
+$danger: #d9534f;
 
 $ease: .3s ease-in-out;
 
@@ -37,7 +39,7 @@ h4 {
 }
 
 p, li, a, input {
-  font-size: 1rem;
+  font-size: 1rem !important;
 }
 
 a {
@@ -148,6 +150,10 @@ input {
   border-bottom: 1px solid #d0d0d0;
 }
 
+.stock-graph {
+  margin-bottom: 6rem;
+}
+
 .stock-graph-list > .tr {
   transition: .1s ease-in-out;
   position: relative;
@@ -171,6 +177,10 @@ input {
     margin-left: auto;
     margin-right: auto;
     vertical-align: center
+}
+
+.text-right {
+  text-align: right;
 }
 
 .notice,
@@ -224,6 +234,10 @@ input {
   align-items: center;
 }
 
+.margin {
+  margin: 2rem 0;
+}
+
 .m-b-sm {
   margin-bottom: 1rem;
 }
@@ -247,6 +261,18 @@ input {
 .bl {
   color: $blue;
   border-bottom: .4rem solid $blue;
+}
+
+.blue {
+  color: $blue;
+}
+
+.success {
+  color: $success;
+}
+
+.danger {
+  color: $danger;
 }
 
 .popup {
@@ -695,4 +721,28 @@ input {
   &:hover {
     color: $blue;
   }
+}
+
+// Particles //
+
+// Stock Callout
+.stock-callout {
+  background: $light;
+  padding: 2rem;
+  margin: 0 .85rem 1rem;
+  border-radius: 5px;
+  display: none;
+
+  a {
+    color: $blue !important;
+    margin-top: .75rem;
+  }
+
+  li {
+    line-height: 1.25rem;
+  }
+}
+
+#current-chart {
+  display: none;
 }

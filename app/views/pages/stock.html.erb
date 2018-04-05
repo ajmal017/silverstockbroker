@@ -1,15 +1,11 @@
-<% title @symbol %>
+<% title @symbol.upcase %>
 <script>
 var ready = function() {
-  var url = $(location).attr('href'),
-      parts = url.split("/"),
-      symbol = parts[parts.length-1];
+ const stockStr = `https://api.iextrading.com/1.0/stock/market/batch?symbols=${'<%= @symbol %>'}&types=earnings,company,chart&range=1m&last=5`
 
-  const stockStr = `https://api.iextrading.com/1.0/stock/market/batch?symbols=${symbol}&types=financials,company,earnings,chart&range=1m&last=5`
-
-  function isEmptyObject(obj){
-    return JSON.stringify(obj) === '{}';
-  }
+ function isEmptyObject(obj){
+   return JSON.stringify(obj) === '{}';
+ }
 
   $.get(stockStr, function(data){
     if (isEmptyObject(data)) {
@@ -65,12 +61,21 @@ $(document).on('turbolinks:load', ready);
       </div>
       <span class="company-desc m-b-md block"></span>
 
-      <% if Post.tagged_with(@symbol) != nil %>
-      <h3 class="title bl">Commentary</h3>
-      <%= render 'components/truncated_list', :@posts => Post.tagged_with(@symbol).where(:category => 'commentary') %>
+      <% if !(@commentary.blank? && @news.blank? && @backtests.blank?) %>
+        <% if !@commentary.blank? %>
+          <h3 class="title bl">Commentary</h3>
+          <%= render 'components/truncated_list', :@posts => @commentary %>
+        <% end %>
 
-      <h3 class="title bl">News</h3>
-      <%= render 'components/truncated_list', :@posts => Post.tagged_with(@symbol).where(:category => 'news') %>
+        <% if !@news.blank? %>
+          <h3 class="title bl">News</h3>
+          <%= render 'components/truncated_list', :@posts => @news %>
+        <% end %>
+
+        <% if !@backtests.blank? %>
+          <h3 class="title bl">Backtests</h3>
+          <%= render 'components/truncated_list', :@posts => @backtests %>
+        <% end %>
       <% end %>
 
       <h3 class="title bl">Links</h3>

@@ -1,0 +1,40 @@
+<% title 'Search' %>
+<%= render 'layouts/inner_nav' %>
+<section class="content">
+  <%= render 'ads/banner' %>
+  <section class="width margin flex-row">
+    <section class="content-container flex-2">
+      <h3 class="m-b-md">Search results for <span class="blue"><%= params[:search] %></span></h3>
+      <%= render 'components/stock_callout' %>
+      <% if !(@commentary.blank? && @news.blank? && @backtests.blank? && @author.blank?) %>
+        <% if !@commentary.blank? %>
+          <h3 class="title bl">Commentary</h3>
+          <%= render 'components/truncated_list', :@posts => @commentary %>
+        <% end %>
+
+        <% if !@news.blank? %>
+          <h3 class="title bl">News</h3>
+          <%= render 'components/truncated_list', :@posts => @news %>
+        <% end %>
+
+        <% if !@backtests.blank? %>
+          <h3 class="title bl">Backtests</h3>
+          <%= render 'components/truncated_list', :@posts => @backtests %>
+        <% end %>
+
+        <% if !@author.blank? %>
+          <h3 class="title bl">Author</h3>
+          <%= render 'components/truncated_list', :@posts => @author %>
+        <% end %>
+      <% else %>
+        <h4 class="m-b-sm">No results fround for <%= @term %></h4>
+        <%= link_to 'Return Home', root_path %>
+      <% end %>
+    </section>
+    <aside class="stock-aside flex-1">
+      <%= render 'ads/aside_ad' %>
+      <%= render 'ads/aside_ad' %>
+      <%= render 'ads/aside_ad' %>
+    </aside>
+  </section>
+</section>

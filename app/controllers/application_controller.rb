@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
 
   @stocks = Stock.all
 
+  private
+
   def authenticate_user!
     if user_signed_in?
       super

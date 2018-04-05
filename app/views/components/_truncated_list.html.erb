@@ -1,14 +1,15 @@
 <% @posts.each do |post| %>
   <div class="post-item">
     <h3><%= post.title %></h3>
-    <span><%= raw(post.content).truncate(358) %></span>
+    <p><%= raw(post.content).truncate(358) %></p>
+    <p class="inline">Tags:</p>
     <% post.tag_arr.each do |tag| %>
-      <%= link_to(tag, "#{tags_path}/#{tag.parameterize}") %>
+      <%= link_to(tag.upcase, "#{tags_path}/#{tag.parameterize}") %>
     <% end %>
 
-    <span class="block">By: <%= post.author %></span>
+    <p class="block">By: <%= post.author.present? ? post.author : '- - - -' %></p>
     <% if user_signed_in? %>
-      <h5><%= post.category %></h5>
+      <p>Category: <%= post.category %></p>
       <div class="post-options">
         <span><%= link_to 'Show', post %></span>
         <span><%= link_to 'Edit', edit_post_path(post) %></span>
