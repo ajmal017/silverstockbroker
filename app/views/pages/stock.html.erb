@@ -1,7 +1,7 @@
 <% title @symbol.upcase %>
 <script>
 var ready = function() {
- const stockStr = `https://api.iextrading.com/1.0/stock/market/batch?symbols=${'<%= @symbol %>'}&types=earnings,company,chart&range=1m&last=5`
+ const stockStr = `https://api.iextrading.com/1.0/stock/market/batch?symbols=${'<%= @symbol %>'}&types=earnings,company,quote,chart&range=1m&last=5`
 
  function isEmptyObject(obj){
    return JSON.stringify(obj) === '{}';
@@ -12,10 +12,18 @@ var ready = function() {
       $('.symbol').text('no stock here')
     } else {
       $.each(data, function (k,v) {
-        console.log(v);
         $('.symbol').text(v.company.symbol)
         $('.company-name').text(v.company.companyName)
         $('.company-desc').text(v.company.description)
+        $('.company-price').text(v.quote.latestPrice.toFixed(2))
+        $('.company-high').text('High: ' + v.quote.high)
+        $('.company-low').text('Low: ' + v.quote.low)
+        $('.company-change').html('Change: <span>' + v.quote.change + '</span>')
+
+        $('.exchange span').text('Exchange: ' + v.company.exchange)
+        $('.industry span').text('Industry:' + v.company.industry)
+        $('.ceo span').text('CEO: ' + v.company.CEO)
+        $('.website a').attr('href', v.company.website)
 
         $.each(v.earnings.earnings, function (k, v) {
           if (v.EPSReportDate !== null) {
@@ -55,26 +63,41 @@ $(document).on('turbolinks:load', ready);
 <%= render 'ads/banner' %>
   <div class="width flex-row">
     <section class="flex-2">
-      <div class="m-b-sm">
-        <h2 class="symbol inline"></h2>
-        <h4 class="company-name inline"></h4>
+      <div class="m-b-md flex-row">
+        <div class="flex-1">
+          <h2 class="symbol inline"></h2>
+          <h4 class="company-name block"></h4>
+        </div>
+        <div class="flex-1">
+          <ul class="no-list-style text-right">
+            <li><h2 class="company-price"></h2></li>
+            <li class="company-high"></li>
+            <li class="company-low"></li>
+            <li class="company-change"></li>
+          </ul>
+        </div>
       </div>
-      <span class="company-desc m-b-md block"></span>
 
       <% if !(@commentary.blank? && @news.blank? && @backtests.blank?) %>
         <% if !@commentary.blank? %>
-          <h3 class="title bl">Commentary</h3>
-          <%= render 'components/truncated_list', :@posts => @commentary %>
+          <div class="m-b-lg">
+            <h3 class="title bl">Commentary</h3>
+            <%= render 'components/truncated_list', :@posts => @commentary %>
+          </div>
         <% end %>
 
         <% if !@news.blank? %>
-          <h3 class="title bl">News</h3>
-          <%= render 'components/truncated_list', :@posts => @news %>
+          <div class="m-b-lg">
+            <h3 class="title bl">News</h3>
+            <%= render 'components/truncated_list', :@posts => @news %>
+          </div>
         <% end %>
 
         <% if !@backtests.blank? %>
-          <h3 class="title bl">Backtests</h3>
-          <%= render 'components/truncated_list', :@posts => @backtests %>
+          <div class="m-b-lg">
+            <h3 class="title bl">Backtests</h3>
+            <%= render 'components/truncated_list', :@posts => @backtests %>
+          </div>
         <% end %>
       <% end %>
 
@@ -93,8 +116,15 @@ $(document).on('turbolinks:load', ready);
     </section>
 
     <aside class="stock-aside flex-1">
+      <%= render 'components/stock_callout', :content => false, :@term => @symbol %>
+      <span class="company-desc m-b-md block"></span>
+      <ul class="no-list-style">
+        <li class="exchange"><span></span></li>
+        <li class="industry"><span></span></li>
+        <li class="ceo"><span></span></li>
+        <li class="website m-b-md"><a class="sm" href="" target="_blank"><span>Visit Website</span></a></li>
+      </ul>
       <%= render 'components/stock-graph' %>
-      <%= render 'ads/aside_ad' %>
       <%= render 'ads/aside_ad' %>
       <%= render 'ads/aside_ad' %>
     </aside>

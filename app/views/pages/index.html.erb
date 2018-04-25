@@ -9,26 +9,49 @@
   </aside>
   <section class="center-flex padding-sm">
     <div class="comments-section m-b-md">
-      <h3 class="title bl">Commentary</h3>
-
-    <ul class="table-row no-list-style">
+      <div class="title bl">
+        <h3 class="inline">Commentary</h3>
+        <div class="f-right">
+          <%= will_paginate @commentaries %>
+        </div>
+      </div>
+    <ul class="table-row no-list-style index-list">
       <% @commentaries.each do |post| %>
-      <li><%= link_to post.title, post %></li>
+      <li>
+        <%= icon('far', 'comment-alt') %>
+        <%= link_to post.title.truncate(32), post %>
+        <div class="f-right">
+          <span class="upcase"><%= post.author %></span>
+          <span><%= post.updated_at.strftime("%m-%d") %></span>
+        </div>
+        <%= link_to '', post, class: 'link-to' %>
+      </li>
       <% end %>
     </ul>
-
-      <button type="button" name="button" class="btn btn-bl">+ More Commentaries</button>
+    <%= link_to '+ More Commentaries', commentary_path, class: 'blue-btn btn' %>
     </div>
     <div class="news-section">
-      <h3 class="title bl">News</h3>
+      <div class="title bl">
+        <h3 class="inline">News</h3>
+        <div class="f-right">
+          <%= will_paginate @news %>
+        </div>
+      </div>
 
-      <ul class="table-row no-list-style">
+      <ul class="table-row no-list-style index-list">
         <% @news.each do |post| %>
-        <li><%= link_to post.title, post %></li>
+        <li>
+          <%= icon('far', 'comment-alt') %>
+          <%= link_to post.title.truncate(32), post %>
+          <div class="f-right">
+            <span class="upcase"><%= post.author %></span>
+            <span><%= post.updated_at.strftime("%m-%d") %></span>
+          </div>
+          <%= link_to '', post, class: 'link-to' %>
+        </li>
         <% end %>
       </ul>
-
-      <button type="button" name="button" class="btn btn-bl">+ More News</button>
+      <%= link_to '+ More News', commentary_path, class: 'blue-btn btn' %>
     </div>
   </section>
   <aside class="right-aside aside-flex padding-sm">

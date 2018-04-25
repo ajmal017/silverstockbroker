@@ -1,4 +1,5 @@
-<%= form_for(@postNew) do |f| %>
+<%= simple_form_for(@postNew) do |f| %>
+  <%= @errors %>
 
   <div class="form-inputs">
     <%= f.label :title %>

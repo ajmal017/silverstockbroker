@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   def index
-    @commentaries = Post.where(:category => 'commentary').order("created_at DESC")
-    @news = Post.where(:category => 'news').order("created_at DESC")
+    @commentaries = Post.where(:category => 'commentary').paginate(:page => params[:page], :per_page => 5).order("created_at DESC")
+    @news = Post.where(:category => 'news').paginate(:page => params[:page], :per_page => 5).order("created_at DESC")
   end
 
   def news

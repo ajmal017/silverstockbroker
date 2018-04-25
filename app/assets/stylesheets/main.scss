@@ -1,5 +1,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
 
 $black: #363636;
 $green: #d3e061;
@@ -42,6 +44,18 @@ p, li, a, input {
   font-size: 1rem !important;
 }
 
+span {
+  font-size: .85rem;
+}
+
+li > span {
+  font-size: .85rem;
+}
+
+.sm {
+  font-size: .85rem !important;
+}
+
 a {
   text-decoration: none !important;
 
@@ -79,6 +93,35 @@ body {
 
 input {
   padding: .25rem;
+}
+
+.pagination {
+  line-height: 1.5rem;
+  margin: .5rem 0 0 0;
+
+  .previous_page,
+  .next_page {
+    display: none;
+  }
+
+  .current {
+    font-size: .75rem !important;
+    color: #333;
+    text-align: center;
+    display: inline-block;
+    height: 1.5rem;
+    width: 1.5rem;
+    font-size: 1rem;
+    font-style: normal;
+    background: $green;
+    border-radius: 50%;
+  }
+
+  a {
+    font-size: .75rem !important;
+    border-bottom: 2px solid #333;
+    padding-bottom: .1rem;
+  }
 }
 
 .inline {
@@ -223,6 +266,11 @@ input {
   flex: 5;
 }
 
+.login-logo {
+  margin: 0 0 2rem;
+  height: 8rem;
+}
+
 .flex-row {
   flex-direction: row;
   display: flex;
@@ -246,10 +294,14 @@ input {
   margin-bottom: 3rem;
 }
 
+.m-b-lg {
+  margin-bottom: 5rem;
+}
+
 .title {
   text-transform: uppercase;
   padding-bottom: .5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.75rem;
   font-weight: bold;
 }
 
@@ -383,9 +435,15 @@ input {
   font-size: .8rem;
 }
 
-.btn-bl {
+a.blue-btn {
   background: $blue;
   color: #fff;
+  padding: .5rem 1rem;
+  font-size: .9rem !important;
+
+  &:visited {
+    color: #fff;
+  }
 }
 
 .banner-ad {
@@ -462,6 +520,19 @@ input {
     z-index: 1;
     opacity: 1;
 
+    .dropdown-content {
+      height: auto;
+      top: 2.2rem;
+
+      a {
+        color: #fff;
+      }
+
+      li {
+        display: block;
+      }
+    }
+
     li.f-right {
       margin: .5rem;
     }
@@ -527,6 +598,10 @@ input {
 
     &:hover {
       color: rgba(255,255,255,.75) !important;
+    }
+
+    &:visited {
+      color: #fff;
     }
   }
 }
@@ -729,7 +804,8 @@ input {
 .stock-callout {
   background: $light;
   padding: 2rem;
-  margin: 0 .85rem 1rem;
+  width: 98%;
+  margin: 0 auto 1rem;
   border-radius: 5px;
   display: none;
 
@@ -745,4 +821,49 @@ input {
 
 #current-chart {
   display: none;
+}
+
+// Lists //
+
+// index
+.index-list {
+  .far {
+    font-size: 1.5rem;
+    vertical-align: bottom;
+    padding-right: .5rem;
+  }
+
+  .link-to {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+  }
+
+  li {
+    padding: .5rem 1rem;
+    transition: $ease;
+    position: relative;
+    border-radius: 5px;
+
+    &:hover {
+      padding: .5rem 1.25rem;
+    }
+  }
+
+  a {
+    line-height: 1.5rem;
+    font-size: .9rem !important;
+  }
+
+  span {
+    margin-right: .5rem;
+    color: #666;
+  }
+}
+
+.blog-content > p {
+  margin-bottom: 2rem;
 }

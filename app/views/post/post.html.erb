@@ -1,0 +1,20 @@
+<% title @post.title %>
+<%= render 'layouts/inner_nav' %>
+<section class="content">
+  <%= render 'ads/banner' %>
+  <section class="width margin flex-row">
+    <section class="content-container flex-2">
+      <h2><%= @post.title %></h2>
+      <p class="inline">By: <%= @post.author %></p>
+      <p class="m-b-md"><%= @post.updated_at.localtime.strftime("%m-%d-%y") %></p>
+      <div class="blog-content">
+        <p><%= raw @post.content %></p>
+      </div>
+    </section>
+    <aside class="stock-aside flex-1">
+      <%= render 'ads/aside_ad' %>
+      <%= render 'ads/aside_ad' %>
+      <%= render 'ads/aside_ad' %>
+    </aside>
+  </section>
+</section>

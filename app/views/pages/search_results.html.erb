@@ -4,27 +4,35 @@
   <%= render 'ads/banner' %>
   <section class="width margin flex-row">
     <section class="content-container flex-2">
-      <h3 class="m-b-md">Search results for <span class="blue"><%= params[:search] %></span></h3>
-      <%= render 'components/stock_callout' %>
+      <h3 class="m-b-md inline">Search results for</h3> <h3 class="blue inline"><%= params[:search] %></h3>
+      <%= render 'components/stock_callout', :content => true %>
       <% if !(@commentary.blank? && @news.blank? && @backtests.blank? && @author.blank?) %>
         <% if !@commentary.blank? %>
-          <h3 class="title bl">Commentary</h3>
-          <%= render 'components/truncated_list', :@posts => @commentary %>
+          <div class="m-b-lg">
+            <h3 class="title bl">Commentary</h3>
+            <%= render 'components/truncated_list', :@posts => @commentary %>
+          </div>
         <% end %>
 
         <% if !@news.blank? %>
-          <h3 class="title bl">News</h3>
-          <%= render 'components/truncated_list', :@posts => @news %>
+          <div class="m-b-lg">
+            <h3 class="title bl">News</h3>
+            <%= render 'components/truncated_list', :@posts => @news %>
+          </div>
         <% end %>
 
         <% if !@backtests.blank? %>
-          <h3 class="title bl">Backtests</h3>
-          <%= render 'components/truncated_list', :@posts => @backtests %>
+          <div class="m-b-lg">
+            <h3 class="title bl">Backtests</h3>
+            <%= render 'components/truncated_list', :@posts => @backtests %>
+          </div>
         <% end %>
 
         <% if !@author.blank? %>
-          <h3 class="title bl">Author</h3>
-          <%= render 'components/truncated_list', :@posts => @author %>
+          <div class="m-b-lg">
+            <h3 class="title bl">Author</h3>
+            <%= render 'components/truncated_list', :@posts => @author %>
+          </div>
         <% end %>
       <% else %>
         <h4 class="m-b-sm">No results fround for <%= @term %></h4>

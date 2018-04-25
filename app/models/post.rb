@@ -1,6 +1,12 @@
 class Post < ApplicationRecord
+  before_create :set_slug
+
   has_many :taggings, dependent: :destroy
   has_many :tags, through: :taggings
+
+  def to_param
+    slug
+  end
 
   def all_tags=(names)
     self.tags = names.split(',').map do |name|
@@ -18,5 +24,20 @@ class Post < ApplicationRecord
 
   def self.tagged_with(name)
     Tag.find_by!(name: name).posts rescue nil
+  end
+
+  private
+
+  def set_slug
+    self.slug = self.title.downcase.parameterize
+    t = Time.now
+    hour = t.strftime('%H')
+    min = t.strftime('%M')
+
+    if Post.where(:slug => self.slug).count == 0
+      self.slug = self.title.downcase.parameterize
+    else
+      self.slug = self.title.downcase.parameterize + '-' + hour + min
+    end
   end
 end

@@ -32,12 +32,24 @@ $.get(stockStr, function(data){
   $.each(data, function (k,v) {
     $('.stock-graph-list').append('<div class="tr">' +
       '<span class="td blue">' + v.quote.symbol + '</span>' +
-      '<span class="td">' + v.quote.latestPrice + '</span>' +
-      '<span class="td stock-val">' + v.quote.change + '</span>' +
-      '<span class="td">' + (v.quote.changePercent).toFixed(2) + '</span>' +
+      '<span class="td">' + v.quote.latestPrice.toFixed(2) + '</span>' +
+      '<span class="td stock-change">' + v.quote.change + '</span>' +
+      '<span class="td stock-percent">' + (v.quote.changePercent).toFixed(3) + '</span>' +
       '<span class="td">' + (v.quote.latestVolume) + '</span>' +
       '<a class="stock-link" href="../stocks/' + v.quote.symbol + '"></a>' +
     '</div>')
+
+    if (v.quote.change >= 0) {
+      $('.stock-change').addClass('success');
+    } else {
+      $('.stock-change').addClass('danger');
+    }
+
+    if (v.quote.changePercent >= 0) {
+      $('.stock-percent').addClass('success');
+    } else {
+      $('.stock-percent').addClass('danger');
+    }
   })
 });
 

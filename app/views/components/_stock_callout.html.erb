@@ -1,5 +1,6 @@
 <script>
 var ready = function() {
+  console.log('<%= @term %>');
   const stockStr = `https://api.iextrading.com/1.0/stock/market/batch?symbols=${'<%= @term %>'}&types=quote,chart&range=1d`
 
   var dailyData = [],
@@ -63,19 +64,21 @@ var ready = function() {
 $(document).on('turbolinks:load', ready);
 </script>
 
-<div class="stock-callout flex-row m-b-sm">
-  <div class="flex-1">
-    <h2 class="symbol inline"></h2>
-    <h4 class="company-name block"></h4>
-    <%= link_to('View Profile', "#{stocks_path}/#{@term}", class: 'inline') %>
+<% if content %>
+  <div class="stock-callout flex-row m-b-sm">
+    <div class="flex-1">
+      <h2 class="symbol inline"></h2>
+      <h4 class="company-name block"></h4>
+      <%= link_to('View Profile', "#{stocks_path}/#{@term}", class: 'inline') %>
+    </div>
+    <div class="flex-1">
+      <ul class="no-list-style text-right">
+        <li><h2 class="company-price"></h2></li>
+        <li class="company-high"></li>
+        <li class="company-low"></li>
+        <li class="company-change"></li>
+      </ul>
+    </div>
   </div>
-  <div class="flex-1">
-    <ul class="no-list-style text-right">
-      <li><h2 class="company-price"></h2></li>
-      <li class="company-high"></li>
-      <li class="company-low"></li>
-      <li class="company-change"></li>
-    </ul>
-  </div>
-</div>
+<% end %>
 <canvas id="current-chart" class="m-b-md"></canvas>
