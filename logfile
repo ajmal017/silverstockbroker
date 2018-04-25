@@ -1,0 +1,7 @@
+2018-04-25 14:25:11.598 PDT [25087] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2018-04-25 14:25:11.598 PDT [25087] LOG:  listening on IPv6 address "::1", port 5432
+2018-04-25 14:25:11.599 PDT [25087] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2018-04-25 14:25:11.616 PDT [25089] LOG:  database system was shut down at 2018-04-25 14:25:02 PDT
+2018-04-25 14:25:11.625 PDT [25087] LOG:  database system is ready to accept connections
+2018-04-25 14:25:43.278 PDT [25141] ERROR:  column "slug" does not exist
+2018-04-25 14:25:43.278 PDT [25141] STATEMENT:  CREATE UNIQUE INDEX  "index_posts_on_slug" ON "posts"  ("slug")
