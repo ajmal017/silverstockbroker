@@ -41,6 +41,8 @@ gem 'ckeditor', '~> 4.1'
 gem 'chart-js-rails'
 gem 'font-awesome-sass', '~> 5.0.9'
 gem 'will_paginate'
+gem 'carrierwave'
+gem 'fog-aws'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
